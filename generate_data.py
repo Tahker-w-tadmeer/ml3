@@ -13,11 +13,13 @@ output_path = "tahkeer_data.csv"
 all_data = pd.read_csv(data_path)
 all_columns = all_data.columns.tolist()
 
-target_column = 'smoking'  
+target_column = 'smoking'
+id_column = 'id'
 
 all_columns.remove(target_column)
+all_columns.remove(id_column)
 
-selected_columns = random.sample(all_columns, 10)
+selected_columns = random.sample(all_columns, 15)
 
 print(selected_columns)  # MUST BE PRINTED
 selected_columns = np.append(selected_columns, target_column)
