@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def plot_histograms(data, c, plots_per_row=2):
+def plot(data, c, p, plots_per_row=2):
     column_count = len(c)
     row_count = (column_count + plots_per_row - 1) // plots_per_row
     fig, axs = plt.subplots(row_count, plots_per_row, figsize=(15, 5 * row_count))
@@ -16,7 +16,7 @@ def plot_histograms(data, c, plots_per_row=2):
         else:
             ax = axs[col_num]
 
-        sns.histplot(data, x=col, ax=ax, hue='smoking', kde=True)
+        p(data, col, ax)
         ax.set_title(col)
 
     # Hide any unused subplots
@@ -30,16 +30,9 @@ def plot_histograms(data, c, plots_per_row=2):
     plt.show()
 
 
+def plot_histograms(data, c, plots_per_row=2):
+    plot(data, c, lambda d, col, ax: sns.histplot(d, x=col, ax=ax, hue='smoking', kde=True), plots_per_row)
 
-def plot_bars(data, c):
-    column_count = len(c)
-    row_count = (column_count + 1) // 2
-    fig, axs = plt.subplots(row_count, 2, figsize=(15, 5 * row_count))
 
-    for i in range(column_count):
-        col = c[i]
-        sns.barplot(data=data, x=col, ax=axs[i // 2, i % 2], hue='smoking')
-        axs[i // 2, i % 2].set_title(col)
-
-    plt.tight_layout()
-    plt.show()
+def plot_bars(data, c, plots_per_row=4):
+    plot(data, c, lambda d, col, ax: sns.barplot(data=d, y=col, ax=ax, hue='smoking'), plots_per_row)
