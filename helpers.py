@@ -35,4 +35,4 @@ def plot_histograms(data, c, plots_per_row=2):
 
 
 def plot_bars(data, c, plots_per_row=4):
-    plot(data, c, lambda d, col, ax: sns.barplot(data=d, y=col, ax=ax, hue='smoking'), plots_per_row)
+    plot(data, c, lambda d, col, ax: sns.barplot(data=d, x=col, ax=ax, hue='smoking'), plots_per_row)
